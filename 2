@@ -1,0 +1,82 @@
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String fullName = "";
+        String email = "";
+        String phone = "";
+        String password = "";
+        do {
+            System.out.println("***************QUAN LY NGUOI DUNG*****************");
+            System.out.println("1. Nhap thong tin nguoi dung");
+            System.out.println("2. Chuan hoa ho ten");
+            System.out.println("3. Kiem tra email hop le");
+            System.out.println("4. Kiem tra so dien thoai hop le");
+            System.out.println("5. Kiem tra mat khau hop le");
+            System.out.println("6. Thoat");
+            System.out.print("Lua chon cua ban:");
+            int choice = Integer.parseInt(sc.nextLine());
+            switch (choice) {
+                case 1:
+                    System.out.println("Nhap thong tin nguoi dung");
+                    fullName = sc.nextLine();
+                    System.out.println("Nhap email nguoi dung");
+                    email = sc.nextLine();
+                    System.out.println("Nhap số điện thoại nguoi dung");
+                    phone = sc.nextLine();
+                    System.out.println("Nhap mật khẩu nguoi dung");
+                    password = sc.nextLine();
+                    break;
+                case 2:
+                    String fullNameSpace = fullName.trim().replaceAll("\\s+", "");
+                    String[] arrStr = fullNameSpace.split(" ");
+                    String fullNameStand = "";
+                    for (int i = 0; i < arrStr.length; i++) {
+                        fullNameStand = Character.toUpperCase(arrStr[i].charAt(0)) + arrStr[i].substring(1).toLowerCase() + "";
+                    }
+                    System.out.println("Tên sau khi chuẩn hóa là " + fullNameStand.trim());
+                    break;
+                case 3:
+                    String emailRegex = "\\w{6,}@\\w{3,}\\.[a-z0-9]{2,3}";
+                    if (Pattern.matches(emailRegex, email)){
+                        System.out.println("Email hợp lệ");
+                    } else {
+                        System.out.println("Email không hợp lệ");
+                    }
+                    break;
+                case 4:
+                    String phoneRegex = "(0)[\\d]{8}";
+                    if (Pattern.matches(phoneRegex, phone)){
+                        System.out.println("So dien thoai hop le");
+                    } else {
+                        System.err.println("So dien thoai khong hop le");
+                    }
+                    break;
+                case 5:
+                    String passwordRegex = "(?=.*(a-z))(?=.*(A-Z))(?=.*(0-9))(?=.*[!@#$%^&*()])[a-z0-9!@#$%^&*(){8,}]";
+                    if (Pattern.matches(passwordRegex, password)){
+                        System.out.println("Mật Khẩu hợp lệ");
+                    }  else {
+                        System.err.println("Mật Khẩu không hợp lệ");
+                    }
+                    break;
+                case 6:
+                    System.exit(0);
+                    break;
+                default:
+                    System.err.println("Vui long nhap tu 1-6");
+            }
+        } while (true);
+    }
+}
+
+
+
+
