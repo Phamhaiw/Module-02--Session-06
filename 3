@@ -1,0 +1,106 @@
+//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Nhập số  lượng biển số xe cần thêm");
+        int soLuong = sc.nextInt();
+        String[] bienSo = new String[soLuong];
+        int currentIndex = 0;
+        do {
+            System.out.println("******************QUẢN LÝ BIỂN SỐ XE****************");
+            System.out.println("1. Thêm các biển số xe");
+            System.out.println("2. Hiển thị danh sách biển số xe");
+            System.out.println("3. Tìm kiếm biển số xe");
+            System.out.println("4. Tìm biển số xe theo mã tỉnh");
+            System.out.println("5. Sắp xếp biển số xe tăng dần");
+            System.out.println("6. Thoát");
+            System.out.print("Lựa chọn của bạn: ");
+            int choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("Nhập  biển xe muốn thêm:");
+                    String cntbienSo = sc.nextLine();
+                    String bienSoRegex = "\\d{2}[A-Z]-\\d{5}";
+                    if (Pattern.matches(bienSoRegex, cntbienSo)) {
+                        bienSo[currentIndex] = sc.next();
+                        currentIndex++;
+                        System.out.println("Biển số đã được thêm");
+                    } else {
+                        System.out.println("Biển số sai. Vui lòng nhập lại");
+                    }
+
+                    break;
+                case 2:
+                    for (int i = 0; i < currentIndex; i++) {
+                        System.out.println("Danh sách biển số xe là:\n" + bienSo[i]);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Nhập biển số xe bạn muốn tìm:");
+                    String findIndex = sc.nextLine();
+                    boolean found = false;
+                    for (int i = 0; i < currentIndex; i++) {
+                        if (findIndex == bienSo[i]) {
+                            System.out.printf("Biẻn sô xe %f nằm ở vị trí %f", findIndex, bienSo[i]);
+                        }
+                    }
+                    if (!found) {
+                        System.out.println("Không tìm thấy biển số xe này.");
+                    }
+                    break;
+                case 4:
+                    System.out.println("Nhập mã tỉnh muốn tìm:");
+                    String cityCode = sc.nextLine();
+
+                    for (int i = 0; i < currentIndex; i++) {
+                        if (bienSo[i].startsWith(cityCode)) {
+                            System.out.println("Danh sách biển số xe muốn tìm là: \n" + bienSo[i]);
+                            found = true;
+                        }
+                    }
+                    break;
+                case 5:
+                    for (int i = 0; i < currentIndex - 1; i++) {
+                        for (int j = 0; j < currentIndex; j++) {
+                            float a = Float.parseFloat(bienSo[i]);
+                            float b = Float.parseFloat(bienSo[j]);
+                            if (a > b) {
+                                float temp = a;
+                                a = b;
+                                b = temp;
+                            }
+                        }
+
+                    }
+                    System.out.println("Da sap xep xong mang tang dan");
+
+                    break;
+                case 6:
+                    System.exit(0);
+                    break;
+                default:
+                    System.err.println("Vui long nhap tu 1-6");
+            }
+
+
+        } while (true);
+    }
+}
+        
+    
+
+
+
+
+
+
+
+
+
